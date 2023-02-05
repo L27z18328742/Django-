@@ -3,7 +3,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
-# timezone ÓÃÓÚ´¦ÀíÊ±¼äÏà¹ØÊÂÎñ¡£
+# timezone ï¿½ï¿½ï¿½Ú´ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 from django.utils import timezone
 from imagekit.processors import ResizeToFit
 from imagekit.models import ProcessedImageField
@@ -21,10 +21,10 @@ class ArticleColumn(models.Model):
         return self.title
 
 
-# ²©¿ÍÎÄÕÂÊı¾İÄ£ĞÍ
+# ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½
 
 class ArticlePost(models.Model):
-    # ÎÄÕÂ×÷Õß¡£²ÎÊı on_delete ÓÃÓÚÖ¸¶¨Êı¾İÉ¾³ıµÄ·½Ê½
+    # ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß¡ï¿½ï¿½ï¿½ï¿½ï¿½ on_delete ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½ï¿½Ä·ï¿½Ê½
     author = models.ForeignKey(User, on_delete=models.CASCADE)
 
     avatar = ProcessedImageField(
@@ -41,27 +41,27 @@ class ArticlePost(models.Model):
     )
     tags = TaggableManager(blank=True)
     total_views = models.PositiveIntegerField(default=0)
-    # ÎÄÕÂ±êÌâ¡£models.CharField Îª×Ö·û´®×Ö¶Î£¬ÓÃÓÚ±£´æ½Ï¶ÌµÄ×Ö·û´®£¬±ÈÈç±êÌâ
+    # ï¿½ï¿½ï¿½Â±ï¿½ï¿½â¡£models.CharField Îªï¿½Ö·ï¿½ï¿½ï¿½ï¿½Ö¶Î£ï¿½ï¿½ï¿½ï¿½Ú±ï¿½ï¿½ï¿½Ï¶Ìµï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     title = models.CharField(max_length=100)
 
-    # ÎÄÕÂÕıÎÄ¡£±£´æ´óÁ¿ÎÄ±¾Ê¹ÓÃ TextField
+    # ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä±ï¿½Ê¹ï¿½ï¿½ TextField
     body = models.TextField()
 
-    # ÎÄÕÂ´´½¨Ê±¼ä¡£²ÎÊı default=timezone.now Ö¸¶¨ÆäÔÚ´´½¨Êı¾İÊ±½«Ä¬ÈÏĞ´Èëµ±Ç°µÄÊ±¼ä
+    # ï¿½ï¿½ï¿½Â´ï¿½ï¿½ï¿½Ê±ï¿½ä¡£ï¿½ï¿½ï¿½ï¿½ default=timezone.now Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½Ú´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½Ä¬ï¿½ï¿½Ğ´ï¿½ëµ±Ç°ï¿½ï¿½Ê±ï¿½ï¿½
     created = models.DateTimeField(default=timezone.now)
 
-    # ÎÄÕÂ¸üĞÂÊ±¼ä¡£²ÎÊı auto_now=True Ö¸¶¨Ã¿´ÎÊı¾İ¸üĞÂÊ±×Ô¶¯Ğ´Èëµ±Ç°Ê±¼ä
+    # ï¿½ï¿½ï¿½Â¸ï¿½ï¿½ï¿½Ê±ï¿½ä¡£ï¿½ï¿½ï¿½ï¿½ auto_now=True Ö¸ï¿½ï¿½Ã¿ï¿½ï¿½ï¿½ï¿½ï¿½İ¸ï¿½ï¿½ï¿½Ê±ï¿½Ô¶ï¿½Ğ´ï¿½ëµ±Ç°Ê±ï¿½ï¿½
     updated = models.DateTimeField(auto_now=True)
 
-    # ÄÚ²¿Àà class Meta ÓÃÓÚ¸ø model ¶¨ÒåÔªÊı¾İ
+    # ï¿½Ú²ï¿½ï¿½ï¿½ class Meta ï¿½ï¿½ï¿½Ú¸ï¿½ model ï¿½ï¿½ï¿½ï¿½Ôªï¿½ï¿½ï¿½ï¿½
     class Meta:
-        # ordering Ö¸¶¨Ä£ĞÍ·µ»ØµÄÊı¾İµÄÅÅÁĞË³Ğò
-        # '-created' ±íÃ÷Êı¾İÓ¦¸ÃÒÔµ¹ĞòÅÅÁĞ
+        # ordering Ö¸ï¿½ï¿½Ä£ï¿½Í·ï¿½ï¿½Øµï¿½ï¿½ï¿½ï¿½İµï¿½ï¿½ï¿½ï¿½ï¿½Ë³ï¿½ï¿½
+        # '-created' ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½Ôµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         ordering = ('-created',)
 
-    # º¯Êı __str__ ¶¨Òåµ±µ÷ÓÃ¶ÔÏóµÄ str() ·½·¨Ê±µÄ·µ»ØÖµÄÚÈİ
+    # ï¿½ï¿½ï¿½ï¿½ __str__ ï¿½ï¿½ï¿½åµ±ï¿½ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ str() ï¿½ï¿½ï¿½ï¿½Ê±ï¿½Ä·ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½
     def __str__(self):
-        # return self.title ½«ÎÄÕÂ±êÌâ·µ»Ø
+        # return self.title ï¿½ï¿½ï¿½ï¿½ï¿½Â±ï¿½ï¿½â·µï¿½ï¿½
         return self.title
 
     def get_absolute_url(self):
