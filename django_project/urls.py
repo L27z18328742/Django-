@@ -13,6 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+import notifications
 from django.contrib import admin
 from django.urls import path, re_path, include
 from django.views.static import serve
@@ -21,6 +22,8 @@ from article import views
 from django_project import settings
 from userprofile.views import user_login, user_logout, helpshow, user_register, user_delete, profile_edit
 from comment.views import post_comment
+import notifications.urls
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -41,5 +44,8 @@ urlpatterns = [
     path('profile/edit/<int:id>/', profile_edit),
     # 评论功能
     path('article/comment/<int:article_id>/', post_comment),
-    path('article/comment/<int:article_id>/<int:parent_comment_id>/', post_comment)
+    path('article/comment/<int:article_id>/<int:parent_comment_id>/', post_comment),
+
+    # 通知
+    path('inbox/notifications/', include(notifications.urls, namespace='notifications')),
 ]
