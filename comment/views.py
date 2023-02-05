@@ -1,5 +1,3 @@
-# -*- coding : utf-8-*-
-# coding:unicode_escape
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
@@ -38,7 +36,7 @@ def post_comment(request, article_id, parent_comment_id=None):
                     notify.send(
                             request.user,
                             recipient=parent_comment.user,
-                            verb='回复了你',
+                            verb="回复了你",
                             target=article,
                             action_object=new_comment,
                         )
