@@ -23,7 +23,7 @@ from django_project import settings
 from userprofile.views import user_login, user_logout, helpshow, user_register, user_delete, profile_edit
 from comment.views import post_comment
 import notifications.urls
-
+from notice.views import CommentNoticeListView,CommentNoticeUpdateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -48,4 +48,7 @@ urlpatterns = [
 
     # 通知
     path('inbox/notifications/', include(notifications.urls, namespace='notifications')),
+    path('list/', CommentNoticeListView.as_view()),
+    # 更新通知状态
+    path('update/',CommentNoticeUpdateView.as_view())
 ]
